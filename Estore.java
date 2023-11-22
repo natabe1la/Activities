@@ -7,9 +7,9 @@ public class Estore {
         String[] products = {"Ballpen", "Pencil", "Eraser", "Correction Tape", "Marker"};
         int[] prices = {10, 7, 5, 15, 10};
         double ans = 0;
-        JOptionPane.showMessageDialog(null, "Welcome to Nat's EStore! \nIn this store we have 5 items available");
+        JOptionPane.showMessageDialog(null, "Welcome to Nat's EStore! \nIn this store we have 5 items available.");
         JOptionPane.showMessageDialog(null, "These are the following items available: \nBallpen - P10 \nPencil - P7 "
-                + "\nEraser - P5 \nCorrection Tape - P15 \nMarker P10");
+                + "\nEraser - P5 \nCorrection Tape - P15 \nMarker - P10");
         JOptionPane.showMessageDialog(null, "We also offer discounts "
                 + "\nP50-P99 worth of products: 5% \nP100-above worth of products :10%");
 
@@ -48,15 +48,15 @@ public class Estore {
             JOptionPane.showMessageDialog(null, selectedItems + "Total amount: P" + totalAmount);
             if (totalAmount >= 150) {
                 double b= totalAmount *0.10;
-                ans = totalAmount - b ; // applies 10% discount sa total
+                ans = totalAmount - b ; // applies 10% discount sa total amount
             } else if (totalAmount >= 99) {
                 double b=totalAmount*0.05;
-                ans = totalAmount - b; // applies 5% discount sa total
+                ans = totalAmount - b; // applies 5% discount sa total amount
             } else {
                 ans = totalAmount;
             }
            while (true){
-            double payment = Double.parseDouble(JOptionPane.showInputDialog("Enter cash amount: \n Your total is " + ans));
+            double payment = Double.parseDouble(JOptionPane.showInputDialog("Enter cash amount: \nYour total is P" + ans));
             if (payment > ans) {
                 double change = payment - ans;
                 JOptionPane.showMessageDialog(null, "Thank you. Your change is: P" + change);
