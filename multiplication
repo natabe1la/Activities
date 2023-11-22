@@ -1,0 +1,18 @@
+import java.util.Scanner;
+
+public class Mtable {
+    public static void main(String [] args){
+    int [] A  = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        Scanner num = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int v = num.nextInt();
+        
+    
+    for(int i=0; i < A.length; i++){
+     String table = v + " x " +A[i]+ " = " + v*A[i] + "\n";
+     System.out.print(table);
+     
+    }
+    }
+}
+    
