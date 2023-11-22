@@ -3,7 +3,7 @@ import javax.swing.JOptionPane;
 public class Estore {
 
     public static void main(String[] args) {
-        
+        //gi apply nako ang lesson ganina sir so medjo si polish nako hehe
         String[] products = {"Ballpen", "Pencil", "Eraser", "Correction Tape", "Marker"};
         int[] prices = {10, 7, 5, 15, 10};
         double ans = 0;
