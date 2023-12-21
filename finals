@@ -63,7 +63,7 @@ public class draft {
                 System.out.println("");
                 if (f == 1){
                 } else if (f==0){
-                    System.out.println("Than you for using this program");
+                    System.out.println("Thank you for using this program");
                     break;
                 } else{
                     System.out.println("INVALID INPUT");
