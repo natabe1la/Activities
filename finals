@@ -6,46 +6,82 @@ import java.util.Random;
  * @author ADMIN
  */
 public class draft {
-    //sir ga mekus mekus rako ani from google and youtube kay 3 days jud ko na stuck kung unsaon ni:')
+    //sir ga mekus mekus rako ani from google and youtube kay 2 days jud ko na stuck kung unsaon ni:')
+    //naka add pud kog mga wala nimo natudlo sir to make this possible
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+         Scanner input = new Scanner(System.in);
         Random seq = new Random();
         String[] questions = {
-            "The lines that are equidistant from each other and never meet are called _________",
-            "The length of a rectangle is 3 more inches than its breadth. The area of the rectangle is 40 in2. \nWhat is the perimeter of the rectangle?", 
+             "The lines that are equidistant from each other and never meet are called _______",
+            "The length of a rectangle is 3 more inches than its breadth. The area of the rectangle is 40 in2. \nWhat is the perimeter of the rectangle?",
             "The base area of a cylinder is 154 cm2 and height is 5 cm. Find the volume of a cylinder",
             "A student creates a challenge for his friend. He first draws a square, the adds the line for each of the 2 diagonals.  Finally, he asks his friend to draw the circle that has the most intersections possible.\nHow many intersections will this circle have?",
             "A triangle has a perimeter of 50. If 2 of its sides are equal and the third side is 5 more than the equal sides, what is the length of the third side?"};
-        String[][] choices = { {"A. Horizontal Lines", "B. Perpendicular Lines", "C. Parallel Lines"}, 
-            {"A. 26 inches", "B. 27 inches", "C. 25 inches"}, {"A. 670 cm^2", "B. 770cm^2", "C. 770cm^3"}, 
-            {"A. 6", "B. 12", "C. 11"}, {"A. 20", "B. 21", "C. 10"} };
+        String[][] choices = { {"A. Horizontal Lines", "B. Perpendicular Lines", "C. Parallel Lines"},
+        {"A. 26 inches", "B. 27 inches", "C. 25 inches"}, {"A. 670 cm^2", "B. 770cm^2", "C. 770cm^3"},
+        {"A. 6", "B. 12", "C. 11"}, {"A. 20", "B. 21", "C. 10"} };
 
         char[] answers = {'C', 'A', 'B', 'B', 'A'};
-        int tquestions = 5;
-    
-        int score = 0;
-        System.out.println("Welcome to Geometry Quiz. Would you like to start the quiz?");
-        System.out.println("Press - 1(Yes), Press - 0(No)");
-        System.out.println("User answer: ");
-        int v = input.nextInt();
-        if (v==1){
-        do{
-            Integer [] newOrder = new Integer[tquestions];
-            for ( int i = 0; i < 5; i++) {
-                int randomseq = seq.nextInt(tquestions - i) + i;
-            
-       
-            score += askQuestion(randomseq, input, questions, choices, answers);
-            }
+        int totalQuestions = 5;
+        int score;
+        
+        while(true){
         System.out.println("");
-        System.out.println("Your final score is: " + score + "/5");
-        System.out.println("Do you want to answer again? (Yes or No)");
-            }while(input.next().equals("Yes"));
-        } else {
+        System.out.println("Welcome to the Geometry Quiz. Would you like to start?");
+        System.out.println("Press 1 for Yes, 0 for No");
+        System.out.print("User answer: ");
+        int v = input.nextInt();
+           
+       if (v == 0){
             System.out.println("");
             System.out.println("User chose not to answer the quiz. \nHave a great day!");
+            break;
+        }else if (v > 1){
+            System.out.println("Invalid Input");
+            break;
+        }else if (v == 1) {
+                int[] usedQuestions = new int[totalQuestions];
+                score = 0;
+
+                for (int i = 0; i < totalQuestions; i++) {
+                    int randomIndex;
+                    do {
+                        randomIndex = seq.nextInt(totalQuestions);
+                    } while (isIndexUsed(randomIndex, usedQuestions, i));
+                    //this is to make sure sir na dili mag balik balik ang question labi nag shuffled siya
+                    // sa first try man gud nako sir random na lagi ang order pero mag balik balik ang questions
+                    usedQuestions[i] = randomIndex;
+                    score += askQuestion(randomIndex, input, questions, choices, answers);
+                }
+       
+                System.out.println("");
+                System.out.println("");
+                System.out.println("Your final score is: " + score + "/5");
+                System.out.println("Do you want to answer again?");
+                System.out.println("Press 1 for Yes, Press 0 for No");
+                int f = input.nextInt();
+                System.out.println("");
+                if (f == 1){
+                } else if (f==0){
+                    System.out.println("Than you for using this program");
+                    break;
+                } else{
+                    System.out.println("INVALID INPUT");
+                    break;
+                }
+                
+    }
+    }
+    }
+
+    static boolean isIndexUsed(int index, int[] usedQuestions, int currentIndex) {
+        for (int i = 0; i < currentIndex; i++) {
+            if (usedQuestions[i] == index) {
+                return true;
+            }
         }
-    }    
+        return false;
+    }
 
     static int askQuestion(int questionNumber, Scanner input, String[] questions, String[][] choices, char[] answers) {
         System.out.println("");
@@ -57,7 +93,7 @@ public class draft {
             System.out.println(choice);
         }
 
-        System.out.print("Your answer (A, B, C, or D): ");
+        System.out.print("Your answer (A, B, or C): ");
         char userAnswer = input.next().charAt(0);
         char correctAnswer = answers[questionNumber];
 
