@@ -1,0 +1,129 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+ 
+public class CCE107_GUI extends JFrame {
+ 
+    private static final String FILE_NAME = "student.txt";
+    private static final String DELIMITER = "#";
+ 
+ 
+    CCE107_GUI(){
+ 
+ 
+        JLabel lblfullname = new JLabel("Fullname");
+        lblfullname.setFont(new Font("Gilroy-Regular", Font.PLAIN, 14));
+        lblfullname.setBounds(62, 147, 66, 14);
+        add(lblfullname);
+ 
+        JLabel lblHeader = new JLabel("ENROLLMENT SYSTEM");
+        lblHeader.setFont(new Font("Gilroy-Bold", Font.PLAIN, 24));
+        lblHeader.setBounds(62, 91, 244, 45);
+        add(lblHeader);
+ 
+        JTextField txtfullname = new JTextField();
+        txtfullname.setBounds(62, 162, 244, 27);
+        add(txtfullname);
+        txtfullname.setColumns(10);
+ 
+        JTextField txtemail = new JTextField();
+        txtemail.setColumns(10);
+        txtemail.setBounds(62, 215, 244, 27);
+        add(txtemail);
+ 
+        JLabel lblEmail = new JLabel("Email");
+        lblEmail.setFont(new Font("Gilroy-Regular", Font.PLAIN, 14));
+        lblEmail.setBounds(62, 200, 66, 14);
+        add(lblEmail);
+ 
+        JTextField txtadd = new JTextField();
+        txtadd.setColumns(10);
+        txtadd.setBounds(62, 268, 244, 27);
+        add(txtadd);
+ 
+        JLabel lblAddress = new JLabel("Address");
+        lblAddress.setFont(new Font("Gilroy-Regular", Font.PLAIN, 14));
+        lblAddress.setBounds(62, 253, 66, 14);
+        add(lblAddress);
+ 
+        JTextField txtcont = new JTextField();
+        txtcont.setColumns(10);
+        txtcont.setBounds(62, 321, 244, 27);
+        add(txtcont);
+ 
+        JLabel lblContactNumber = new JLabel("Contact Number");
+        lblContactNumber.setFont(new Font("Gilroy-Regular", Font.PLAIN, 14));
+        lblContactNumber.setBounds(62, 306, 115, 14);
+        add(lblContactNumber);
+ 
+        JLabel lblGender = new JLabel("Gender");
+        lblGender.setFont(new Font("Gilroy-Regular", Font.PLAIN, 14));
+        lblGender.setBounds(62, 359, 66, 14);
+        add(lblGender);
+ 
+        JComboBox comgen = new JComboBox();
+        comgen.setFont(new Font("Gilroy-Regular", Font.PLAIN, 14));
+        comgen.setModel(new DefaultComboBoxModel(new String[] {"Male", "Female"}));
+        comgen.setBounds(62, 374, 244, 27);
+        add(comgen);
+ 
+        JButton btnRegister = new JButton("Register");
+        btnRegister.setBackground(Color.LIGHT_GRAY);
+        btnRegister.setFont(new Font("Gilroy-Regular", Font.PLAIN, 14));
+        btnRegister.setBounds(217, 559, 89, 32);
+        add(btnRegister);
+ 
+        btnRegister.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+ 
+            try(FileWriter fw = new FileWriter(FILE_NAME,true);
+                BufferedWriter bw = new BufferedWriter(fw)){
+ 
+                String fullname = txtfullname.getText();
+                String email = txtemail.getText();
+                String address = txtadd.getText();
+                String contact = txtcont.getText();
+                String gender = (String) comgen.getSelectedItem();
+ 
+                bw.write(fullname + DELIMITER + email + DELIMITER+
+                        address + DELIMITER + contact + DELIMITER + gender);
+                
+                bw.newLine();
+                
+                JOptionPane.showMessageDialog(null,"Enrolled");
+ 
+            }catch (IOException x){
+                JOptionPane.showMessageDialog(null,"Error saving");
+            }
+ 
+            }
+        });
+ 
+ 
+
+ 
+ 
+        setSize(1029,692);
+        setLocationRelativeTo(null);
+        setLayout(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+ 
+ 
+    }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    public static void main(String[]args){
+        new CCE107_GUI();
+    }
+}
